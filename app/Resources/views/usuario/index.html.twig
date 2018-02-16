@@ -1,0 +1,53 @@
+{% extends 'main.html.twig' %}
+
+{% block content %}
+    <h1 class="page-header">Usuarios</h1>
+
+    <table class="table table-responsive table-hover table-condensed">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>usuario</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for usuario in usuarios %}
+            <tr>
+                <td>{{ loop.index }}</a></td>
+                <td>{{ usuario.name }}</td>
+                <td>{{ usuario.email }}</td>
+                <td>{{ usuario.username }}</td>
+                <td>
+                    <a href="javascript:void(0);"
+                       data-placement="top"
+                       title="Cambiar contraseña"
+                       class="link-tooltip change_pass"
+                       data-description="{{ usuario.name }}"
+                       data-url="{{ path('change_password',{ 'id': usuario.id }) }}"
+                        >
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                    <a href="{{ path('usuario_edit',{ 'id': usuario.id }) }}" class="link-tooltip" data-placement="top" title="Editar">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                    <a href="javascript:void(0);"
+                       class="link-tooltip link-delete"
+                       data-placement="top"
+                       title="Eliminar"
+                       {#data-toggle="modal"#}
+                       {#data-target="#modal-delete"#}
+                       data-url="{{ path('usuario_delete',{'id':usuario.id}) }}"
+                    >
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path("usuario_new") }}" class="btn btn-primary">Add Usuario</a>
+{% endblock %}

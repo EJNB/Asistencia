@@ -1,0 +1,6 @@
+cosas para hacer manana
+1. Sobre los reportes
+	
+	hacer el timer para q se actualice todo el tiempo
+	hacer el buscar
+	poner los indicadores de arriba hacia abajo para el ordenar

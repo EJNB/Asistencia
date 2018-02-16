@@ -1,0 +1,53 @@
+<nav class="navbar navbar-inverse" role="navigation" style="border-radius: 0">
+    <div class="container-fluid" >
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Asistencia</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                {#<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>#}
+                {% if is_granted(['ROLE_ADMIN']) %}
+                <li><a href="{{ path('usuario_index') }}">Usuarios</a></li>
+                {% endif %}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Reportes <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="{{ path('reportes_resueltos') }}">Resueltos</a></li>
+                        <li><a href="{{ path('reportes_pendientes') }}">Pendientes</a></li>
+                        <li><a href="{{ path('reporte_index') }}">Todos</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="hidden" value="{{ app.request.uri }}">
+                    <input type="text" class="form-control" placeholder="Buscar"/>
+                </div>
+                <button type="submit" class="btn btn-primary link-tooltip">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <span class="glyphicon glyphicon-user"></span>{{ app.user.name }}
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="javascript:void(0);" class="change_pass" data-url="{{ path('change_password',{ 'id' : app.user.id }) }}">Cambiar mi contraseña</a></li>
+                        <li><a href="{{ path('mis_reportes') }}">Mis Reportes</a></li>
+                        <li><a href="{{ path('logout') }}">Salir</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>

@@ -1,0 +1,34 @@
+{% extends 'main.html.twig' %}
+
+{% block content %}
+    <h1>Reportado por {{ reporte.remitente }}</h1>
+
+    <table class="table table-hover">
+        <tbody>
+            <tr>
+                <th>Fecha de creaci&oacute;n</th>
+                <td>{% if reporte.fechaCreacion %}{{ reporte.fechaCreacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fecha de realizaci&oacute;n</th>
+                <td>{% if reporte.fechaRealizacion %}{{ reporte.fechaRealizacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Estado</th>
+                <td>{% if reporte.estado=='Resuelto' %}<span class="label label-success">{{ reporte.estado }}</span>{% else %}<span class="label label-danger">{{ reporte.estado }}</span>{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Encabezado</th>
+                <td>{{ reporte.encabezado }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ reporte.descripcion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="pull-left">
+        <a href="{{ path('reportes_pendientes') }}" class="btn btn-default">Volver al listado</a>
+    </div>
+{% endblock %}

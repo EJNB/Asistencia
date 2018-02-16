@@ -1,0 +1,15 @@
+{% extends 'main.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="col-md-3"></div>
+        <h1 class="text-center page-header">Lo sentimos pero usted no tiene permisos para el servicio solicitado</h1>
+        {# example security usage, see below #}
+        {#{% if app.user and is_granted('IS_AUTHENTICATED_FULLY') %}#}
+            {# ... #}
+        {#{% endif %}#}
+        {#<p>#}
+            {#The requested page couldn't be located. Checkout for any URL#}
+            {#&#123;&#35;misspelling or <a href="{{ path('homepage') }}">return to the homepage</a>.&#35;&#125;#}
+        {#</p>#}
+    </div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% form_theme form 'form/fields.html.twig' %}
+{% extends 'main.html.twig' %}
+
+{% block content %}
+    <h1 class="page-header">Crear Usuario</h1>
+
+    {{ form_start(form) }}
+    <div class="col-md-3">
+        {{ form_row(form.name) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.username) }}
+        <div class="form-group">
+            {{ form_label(form.password.first) }}
+            {% if form_errors(form.password.first)!= null %}
+                <div class="alert alert-danger alert-dismissible alert-cerrar" role="alert" id="form-alert-error" data-dismiss="alert" >
+                    <div style="float: left;"><span class="glyphicon glyphicon-chevron-left"></span></div>
+                    {{ form_errors(form.password.first) }}
+                </div>
+            {% else %}
+                {{ form_errors(form.password.first) }}
+            {% endif %}
+            {#{{ form_label(form.password.first) }}#}
+            {{ form_widget(form.password.first,{'attr':{'class':'form-control'}}) }}
+        </div>
+        {{ form_row(form.password) }}
+        {{ form_row(form.password.second) }}
+
+        <button class="btn btn-primary" type="submit">Crear</button>
+        <a href="{{ path('usuario_index') }}" class="btn btn-default">Volver al listado</a>
+    </div>
+
+    <div class="col-md-3">
+        {{ form_label(form.isActive) }}
+        <div class="switch">
+            {{ form_widget(form.isActive) }}
+            {{ form_label(form.isActive) }}
+        </div>
+        {{ form_errors(form.isActive) }}
+        <div class="form-group">
+            {{ form_label(form.roles) }}
+            {{ form_widget(form.roles) }}
+            {{ form_errors(form.roles) }}
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+{% endblock %}

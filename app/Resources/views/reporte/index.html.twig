@@ -1,0 +1,63 @@
+{% extends 'main.html.twig' %}
+
+{% block content %}
+    <h1 class="page-header">Todos los Reportes</h1>
+
+    <div class="count pull-left" style="display: block;">
+        Total de registros : <span class="badge">{{ pagination.getTotalItemCount }}</span>
+    </div>
+    <br>
+
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>No</th>
+                {#<th style="width: 15%">{{ knp_pagination_sortable(pagination, 'Creado', 'p.fechaCreacion') }}</th>#}
+                <th style="width: 10%">Creado</th>
+                {#<th style="width: 10%">{{ knp_pagination_sortable(pagination, 'Solucionado', 'p.fechaRealizacion') }}</th>#}
+                <th style="width: 10%">Solucionado</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Estado', 'p.estado') }}</th>
+                <th style="width: 10%">Encabezado</th>
+                <th style="width: 40%">Descripcion</th>
+                <th style="width: 10%">{{ knp_pagination_sortable(pagination, 'Remitente', 'p.remitente') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Resuelto', 'p.usuario') }}</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reporte in pagination %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{% if reporte.fechaCreacion %}{{ reporte.fechaCreacion|date('d-m-Y H:i:s') }}{% endif %}</td>
+                <td>{% if reporte.fechaRealizacion %}{{ reporte.fechaRealizacion|date('d-m-Y H:i:s') }}{% endif %}</td>
+                <td>{% if reporte.estado=='Resuelto' %}<span class="label label-success">{{ reporte.estado }}</span>{% else %}<span class="label label-danger">{{ reporte.estado }}</span>{% endif %}</td>
+                <td>{{ reporte.encabezado }}</td>
+                <td>{{ reporte.descripcion }}</td>
+                <td>{{ reporte.remitente }}</td>
+                <td> {% if reporte.estado=="Resuelto" %}
+                        {{ reporte.usuario }}
+                    {% endif %}
+				</td>
+                <td>
+                    {% if reporte.estado!="Resuelto" %}
+                        
+                        <a href="{{ path('reporte_show', { 'id': reporte.id }) }}" class="link-tooltip" data-placement="top" title="Ver">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                        </a>
+                        <a href="{{ path('reporte_resolver',{ 'id': reporte.id }) }}" class="link-tooltip" data-toggle="tooltip" data-placement="top" title="Resuelto" {#                    <a href="javascript:void(0);" class="link-tooltip" data-toggle="tooltip" data-placement="top" title="Resuelto"#}>
+
+                            <span class="glyphicon glyphicon glyphicon-check"></span>
+                        </a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+
+    {#<a href="{{ path('reporte_new') }}" class="btn btn-default">Crear reporte</a>#}
+{% endblock %}
